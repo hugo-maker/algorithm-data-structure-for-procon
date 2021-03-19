@@ -1,0 +1,39 @@
+# 拡張子のない実行ファイル
+*
+!*/
+!*.*
+
+# Makefileはtrackする
+!Makefile
+
+# tag files
+*.tags
+
+# swap files
+*.swp
+
+# object files
+*.o
+
+# libraries
+*.a
+
+# shared objects
+*.so
+*.dll
+
+# コンパイル済みヘッダーファイル
+*.gch
+
+# debug files
+*.dat
+*.dSYM/
+
+# logfiles
+*.log
+
+# 一時ファイル
+*.~
+
+# shell script
+git_auto.sh
