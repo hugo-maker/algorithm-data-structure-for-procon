@@ -1,46 +1,44 @@
 #include <iostream>
-#include <algorithm>
+#include <string>
 #include <queue>
+#include <algorithm>
 using namespace std;
-
-struct process
-{
-  char name[100];
-  int time;
-};
 
 int main()
 {
-  int elapsed_time = 0;
-  int counter = 0;
+  int num = 0;
   int quantum = 0;
-  int process_num = 0;
-  queue<process> processes;
-  process temp;
+  int time = 0;
+  string name;
 
-  cin >> process_num >> quantum;
+  queue<pair<string, int>> process;
 
-  for (int i = 1; i <= process_num; ++i)
+  cin >> num >> quantum;
+
+  for (int i = 0; i < num; ++i)
   {
-    cin >> temp.name;
-    cin >> temp.time;
-    processes.push(temp);
+    cin >> name >> time;
+    process.push(make_pair(name, time));
   }
 
-  while (!processes.empty())
+  pair<string, int> work_space;
+  int elaps = 0;
+  int a = 0;
+
+  while (!process.empty())
   {
-    temp = processes.front();
-    processes.pop();
-    counter = min(quantum, temp.time);
-    temp.time -= counter;
-    elapsed_time += counter;
-    if (temp.time > 0)
+    work_space = process.front();
+    process.pop();
+    a = min(work_space.second, quantum);
+    work_space.second -= a;
+    elaps += a;
+    if (work_space.second > 0)
     {
-      processes.push(temp);
+      process.push(work_space);
     }
     else
     {
-      cout << temp.name << " " << elapsed_time << endl;
+      cout << work_space.first << " " << elaps << endl;
     }
   }
 

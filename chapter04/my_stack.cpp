@@ -1,47 +1,47 @@
 #include <stack>
 #include <iostream>
 #include <cstdlib>
-#include <string>
 using namespace std;
 
 int main()
 {
   stack<int> int_in_stack;
-  int a, b;
-  string symbol;
+  char symbol[256];
+
+  int operand1, operand2;
 
   while (cin >> symbol)
   {
     if (symbol[0] == '+')
     {
-      a = int_in_stack.top();
+      operand1 = int_in_stack.top();
       int_in_stack.pop(); 
-      b = int_in_stack.top();
+      operand2 = int_in_stack.top();
       int_in_stack.pop(); 
 
-      int_in_stack.push(a + b);
+      int_in_stack.push(operand1 + operand2);
     }
     else if (symbol[0] == '-')
     {
-      b = int_in_stack.top();
+      operand2 = int_in_stack.top();
       int_in_stack.pop(); 
-      a = int_in_stack.top();
+      operand1 = int_in_stack.top();
       int_in_stack.pop(); 
 
-      int_in_stack.push(a - b);
+      int_in_stack.push(operand1 - operand2);
     }
     else if (symbol[0] == '*')
     {
-      a = int_in_stack.top();
+      operand1 = int_in_stack.top();
       int_in_stack.pop(); 
-      b = int_in_stack.top();
+      operand2 = int_in_stack.top();
       int_in_stack.pop(); 
 
-      int_in_stack.push(a * b);
+      int_in_stack.push(operand1 * operand2);
     }
     else
     {
-      int_in_stack.push(atoi(symbol.c_str()));
+      int_in_stack.push(atoi(symbol));
     }
   }
 
