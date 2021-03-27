@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-static const long long int SENTINEl = 2000000000;
+static const long long int SENTINEL = 2000000000;
 static const int MAX = 500000;
 
 int left_array[MAX / 2 + 2];
@@ -20,8 +20,8 @@ void merge(int array[], int n, int left, int mid, int right)
   {
     right_array[i] = array[mid + i];
   }
-  left_array[n1] = SENTINEl;
-  right_array[n2] = SENTINEl;
+  left_array[n1] = SENTINEL;
+  right_array[n2] = SENTINEL;
 
   int i = 0;
   int j = 0;
