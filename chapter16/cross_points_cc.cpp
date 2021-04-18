@@ -70,6 +70,15 @@ struct Segment
 
 typedef Segment Line;
 
+class Circle
+{
+public:
+  Point c;
+  double r;
+  Circle(Point c = Point(), double r = 0.0)
+    : c(c), r(r) {}
+};
+
 double dot(Vector a, Vector b)
 {
   return a.x * b.x + a.y * b.y;
@@ -80,28 +89,36 @@ double cross(Vector a, Vector b)
   return a.x * b.y - a.y * b.x;
 }
 
-Point project(Segment s, Point p)
+double arg(Vector p)
 {
-  Vector base = s.p2 - s.p1;
-  double r = dot(p - s.p1, base) / norm(base);
-  return s.p1 + base * r;
+  return atan2(p.y, p.x);
+}
+
+Vector polar(double a, double r)
+{
+  return Point(cos(r) * a, sin(r) * a);
+}
+
+pair<Point, Point> get_cross_points(Circle c1, Circle c2)
+{
+  double d = abs(c1.c - c2.c);
+  double a = acos((c1.r * c1.r + d * d - c2.r * c2.r) / (2 * c1.r * d));
+  double t = arg(c2.c - c1.c);
+  return make_pair(c1.c + polar(c1.r, t + a), c1.c + polar(c1.r, t - a));
 }
 
 int main()
 {
-  Segment s;
-  Point p;
-  cin >> s.p1.x >> s.p1.y >> s.p2.x >> s.p2.y;
-
-  int q;
-  cin >> q;
-
-  for (int i = 0; i < q; ++i)
+  Circle c1, c2;
+  cin >> c1.c.x >> c1.c.y >> c1.r;
+  cin >> c2.c.x >> c2.c.y >> c2.r;
+  auto ans = get_cross_points(c1, c2);
+  if (!(ans.first < ans.second))
   {
-   cin >> p.x >> p.y;
-    Point x = project(s, p);
-    cout << setprecision(20) << x.x << " " << x.y << endl;
+    swap(ans.first, ans.second);
   }
+  cout << ans.first.x << " " << ans.first.y << " "
+    << ans.second.x << " " << ans.second.y << endl;
 
   return 0;
 }
