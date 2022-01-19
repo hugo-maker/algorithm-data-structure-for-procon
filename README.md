@@ -1,4 +1,4 @@
-# algorithm\_data\_structure\_for\_procon
+# algorithm-data-structure-for-procon
 
 学習内容のアウトプット
 
